@@ -4,7 +4,7 @@ A simple program, that demonstrates how to open an LED with the press of a butto
 As you can see in the figure 1, we have the memory map of the microcontroller. Peripherals starts from address 0x40000000 all the way up to 0x50001FFF.
 In this specific range of memory, are stored buses like AHB, gpios and etc. 
 
-![Alt text]([image link](https://github.com/nikosgri/ARM_Assembly_GPIO_Input/blob/master/img/Screenshot%202023-12-25%20at%204.06.16%20PM.png))
+![Memory Map](https://github.com/nikosgri/ARM_Assembly_GPIO_Input/blob/master/img/Screenshot%202023-12-25%20at%204.06.16%20PM.png)
 
 ### Locating registers
 First and foremost, we have to follow some simple steps, that will define to us what register we will need. Those steps are:
