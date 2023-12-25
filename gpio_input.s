@@ -13,18 +13,18 @@ Actions:
 */
 
 .equ	RCC_BASE,		0x40021000
-.equ	IOPENR_OFFSET,	0x2C
+.equ	IOPENR_OFFSET,		0x2C
 .equ	RCC_IOPENR,		(RCC_BASE + IOPENR_OFFSET)
 
 .equ	GPIOA_BASE,		0x50000000
-.equ	MODER_OFFSET,	0x00
-.equ	GPIOA_MODER,	(GPIOA_BASE + MODER_OFFSET)
+.equ	MODER_OFFSET,		0x00
+.equ	GPIOA_MODER,		(GPIOA_BASE + MODER_OFFSET)
 
-.equ	BSRR_OFFSET,	0x18
+.equ	BSRR_OFFSET,		0x18
 .equ	GPIOA_BSRR,		(GPIOA_BASE + BSRR_OFFSET)
 
 .equ	GPIOC_BASE,		0X50000800
-.equ	GPIOC_MODER,	(GPIOC_BASE + MODER_OFFSET)
+.equ	GPIOC_MODER,		(GPIOC_BASE + MODER_OFFSET)
 
 .equ	IDR_OFFSET,		0x10
 .equ	GPIOC_IDR,		(GPIOC_BASE + IDR_OFFSET)
@@ -51,16 +51,16 @@ Actions:
 
 
 main:
-			bl	gpio_init	//Initialize GPIO pins
+			bl gpio_init //Initialize GPIO pins
 
 
 loop:
 			/* Read input pin 13 on port C, and every time is pressed enable the led */
-			bl	get_input
+			bl  get_input
 			cmp r1,#PIN_ON
-			beq	button_pressed
+			beq button_pressed
 			bl  button_released
-			b	loop
+			b loop
 
 get_input:
 			/* Read the input pin 13*/
@@ -68,30 +68,30 @@ get_input:
 			ldr r1,[r0]
 			ldr r2, =PIN_13
 			and r1,r1,r2
-			bx	lr
+			bx lr
 
 gpio_init:
 			/* Initialize GPIO pins */
 
 			/* Enable clock access to GPIOA */
-			ldr	r0,=RCC_IOPENR
-			ldr	r1,[r0]
-			ldr	r2,=IOPAEN
-			orr	r1,r1,r2
+			ldr r0,=RCC_IOPENR
+			ldr r1,[r0]
+			ldr r2,=IOPAEN
+			orr r1,r1,r2
 			str r1,[r0]
 			/* Configure pin 5 as GPIO output mode*/
 			ldr r0,=GPIOA_MODER
 			ldr r1,[r0]
 			ldr r2,=MODE5_0
-			orr	r1,r1,r2
+			orr r1,r1,r2
 			str r1,[r0]
 			ldr r2,=MODE5_1
 			mvn r2,r2
 			and r1,r1,r2
 			str r1,[r0]
 			/* Enable clock access to GPIOC*/
-			ldr	r0,=RCC_IOPENR
-			ldr	r1,[r0]
+			ldr r0,=RCC_IOPENR
+			ldr r1,[r0]
 			ldr r2,=IOPCEN
 			orr r1,r1,r2
 			str r1,[r0]
@@ -106,7 +106,7 @@ gpio_init:
 			mvn r2,r2
 			and r1,r1,r2
 			str r1,[r0]
-			bx 	lr
+			bx lr
 
 button_pressed:
 			/* Turn on the LED */
@@ -115,7 +115,7 @@ button_pressed:
 			ldr r2,=BS5
 			orr r1,r1,r2
 			str r1,[r0]
-			b	loop
+			b loop
 button_released:
 			/* Turn off the LED */
 			ldr r0,=GPIOA_BSRR
@@ -123,7 +123,7 @@ button_released:
 			ldr r2,=BR5
 			orr r1,r1,r2
 			str r1,[r0]
-			b	loop
+			b loop
 exit:
 			b exit
 			.align
