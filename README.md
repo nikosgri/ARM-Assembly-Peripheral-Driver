@@ -24,4 +24,4 @@ Elaborating more to that topic, if we give a closer look to the register map, we
 2) bx  lr return from a label(function). BX stands for  branch and exchange instruction set.
 
 ## STM32L053R8 block diagram
-![Alt text](image link)
+![Block Diagram](https://github.com/nikosgri/ARM_Assembly_GPIO_Input/blob/master/img/Screenshot%202023-12-25%20at%204.35.43%20PM.png)
